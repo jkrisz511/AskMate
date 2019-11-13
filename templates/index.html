@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ title }} | Ask Mate</title>
+
+    <!------ Google fonts ------->
+    <link href="https://fonts.googleapis.com/css?family=Shojumaru" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Monoton">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+</head>
+<body>
+    <div class="container">
+        <div class="container__item landing-page-container">
+            <div class="content-wrapper">
+
+                <header class="header">
+                    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+                </header>
+
+                <div id="myNav" class="overlay">
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                    <div class="overlay-content">
+                      <a href="{{ url_for('route_main') }}">Home</a>
+                      <a href="{{ url_for('register') }}">Register</a>
+                      <a href="{{ url_for('login') }}">Login</a>
+                    </div>
+                </div>
+
+                <div class="ellipse-container">
+
+                   <h2 class="greeting">AskMate</h2>
+                   <h3 class="team">By Astro Toddlers</h3>
+
+                   <div class="ellipse ellipse__outer--thin">
+                        <div class="ellipse ellipse__orbit"></div>
+                   </div>
+
+                   <div class="ellipse ellipse__outer--thick">
+
+                   </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openNav() {
+          document.getElementById("myNav").style.width = "100%";
+        }
+
+        function closeNav() {
+          document.getElementById("myNav").style.width = "0%";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    {% include 'navbar.html' %}
+
+    <!---------------------------------------- QUESTION DETAILS  --------------------------------------->
+
+    {% for question in questions %}
+        {% if id == question['id'] %}
+
+        <h2 class="mt-4 text-xl-left" style="font-family: 'Fredericka the Great', Tahoma, sans-serif; letter-spacing: 2px; word-spacing: 5px;">{{ question['title'] }}</h2>
+
+        <div class="table-responsive mt-4 mb-4">
+            <table class="table table-bordered table-hover table-ligth">
+                <thead class="bg-secondary text-white">
+                </thead>
+                <tbody class="bg-light shadow p-3 mb-5 bg-white rounded">
+                    <tr>
+
+                        <td>
+                            <div>
+                                <p>{{ question['message'] }}</p>
+                            </div>
+                            <div><a href="" class="badge badge-secondary">python</a></div>
+                            <div class="text-right">
+                                <a href="/question/{{ question['id'] }}/new-comment" class="btn btn-primary mb-2"><i class="fas fa-plus-circle"> Comment</i></a>
+                                <a href="/question/{{ question['id'] }}/edit" class="btn btn-info mb-2"><i class="fas fa-edit"></i></a>
+                                <form action="{{ url_for('delete_question', question_id=id) }}" method="post" style="display: inline-block">
+                                    <button type="submit" class="btn btn-danger mb-2"><i class="fas fa-trash-alt"></i></button>
+                                </form>
+                            </div>
+
+                            <div class="text-right font-italic" style="font-size: 14px;">{{ question['submission_time'] }}</div>
+                        </td>
+                        <td>
+                            <div class="text-center">
+                                <span>
+                                    <form action="{{ url_for('vote_up_question', question_id=id) }}" method="post">
+                                        <button type="submit" class="btn btn-lg btn-light mb-2">▲</button>
+                                    </form>
+                                    <div class="text-sm-center">{{ question['vote_number'] }}</div>
+
+                                    <form action="{{ url_for('vote_down_question', question_id=id) }}" method="post">
+                                        <button type="submit" class="btn btn-lg btn-light mb-2">▼</button>
+                                    </form>
+                                    <div class="badge badge-secondary" style="font-size: 16px;">Votes</div>
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+            {% endif %}
+        {% endfor %}
+
+        <!-------------------------------------- QUESTION COMMENTS ------------------------------------------>
+
+        {% for question in questions %}
+            {% if id == question['id'] %}
+
+                <h4 class="mt-4 text-md-left" style="font-family: 'Fredericka the Great', Tahoma, sans-serif; letter-spacing: 2px; word-spacing: 5px; padding-top: 50px;">Question Comments</h4>
+                <hr>
+
+                <div class="col-md-10 text-left">
+                {% for comment in comments %}
+
+                    {% if comment['question_id'] == question['id'] and comment['answer_id'] == None %}
+
+                        <div>
+                            <p>{{ comment['message'] }}</p>
+                            <div class="text-right">
+                                <a href="/comment/{{ comment['id'] }}/edit" class="btn btn-info mb-2"><i class="fas fa-edit"></i></a>
+                                <form action="{{ url_for('delete_comment', comment_id=comment['id']) }}" method="post" style="display: inline-block;">
+                                    <button type="submit" class="btn btn-danger mb-2"><i class="fas fa-trash-alt"></i></button>
+                                </form>
+                            </div>
+                            <div class="text-right font-italic" style="font-size: 14px;">{{ comment['submission_time'] }}</div>
+                            <hr>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                </div>
+
+            {% endif %}
+        {% endfor %}
+
+        <!------------------------------------------- ANSWER DETAILS ------------------------------------------>
+        <div class="text-right">
+            <h2 class="mt-4 text-xl-left" style="font-family: 'Fredericka the Great', Tahoma, sans-serif; letter-spacing: 2px; word-spacing: 5px; padding-top: 50px;">Answers</h2>
+            <a href="/question/{{ id }}/new-answer" class="btn btn-primary mb-2"><i class="fas fa-plus-circle"> Answer</i></a>
+        </div>
+        <table class="table table-bordered table-hover table-ligth">
+            <tbody class="bg-light shadow p-3 mb-5 bg-white rounded">
+                {% for answer in answers %}
+                    {% if id == answer['question_id'] %}
+                        <tr>
+                            <td>
+                                <div>
+                                    <p>{{ answer['message'] }}</p>
+                                    <div class="text-right">
+                                        <span>
+                                              <span style="display: inline-block;">
+                                                  {% if answer['acception'] == False %}
+                                                      {% if session["user_id"] == user_id %}
+                                                      <form action="{{ url_for('accept_answer', question_id=id, answer_id=answer['id']) }}" method="post">
+                                                          <button type="submit" class="btn btn-light mb-2"><i class="fas fa-check"></i></button>
+                                                      </form>
+                                                      {%  endif %}
+                                                  {% endif %}
+                                              </span>
+                                              <span style='font-size:15px;'>
+                                                  {% if answer['acception'] == True %}
+                                                      &#10004;Accepted by user
+                                                  {% endif %}
+                                              </span>
+                                            <a href="/answer/{{ answer['id'] }}/new-comment" class="btn btn-primary mb-2"><i class="fas fa-plus-circle"> Comment</i></a>
+                                            <a href="/answer/{{ answer['id'] }}/edit" class="btn btn-info mb-2"><i class="fas fa-edit"></i></a>
+                                            <form action="{{ url_for('delete_answer', question_id=id, answer_id=answer['id']) }}" method="post" style="display: inline-block">
+                                                <button type="submit" class="btn btn-danger mb-2"><i class="fas fa-trash-alt"></i></button>
+                                            </form>
+                                        </span>
+                                    </div>
+                                    <div class="text-right font-italic" style="font-size: 14px;">{{ answer['submission_time'] }}</div>
+
+                                </div>
+
+                            </td>
+                            <td>
+                                <div class="text-center">
+                                    <span>
+                                        <form action="{{ url_for('vote_up_answer', question_id=id, answer_id=answer['id']) }}" method="post">
+                                            <button type="submit" class="btn btn-lg btn-light mb-2">▲</button>
+                                        </form>
+                                        <div class="text-sm-center">{{ answer['vote_number'] }}</div>
+                                        <form action="{{ url_for('vote_down_answer', question_id=id, answer_id=answer['id']) }}" method="post">
+                                            <button type="submit" class="btn btn-lg btn-light mb-2">▼</button>
+                                        </form>
+                                        <div class="badge badge-secondary" style="font-size: 16px;">Votes</div>
+                                    </span>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!------------------------------------------ ANSWER COMMENTS ------------------------------------------->
+
+        <h4 class="mt-4 text-md-left" style="font-family: 'Fredericka the Great', Tahoma, sans-serif; letter-spacing: 2px; word-spacing: 5px; padding-top: 50px;">Answer Comments</h4>
+        <hr>
+
+        {% for answer in answers %}
+            {% if id == answer['question_id'] %}
+            <div class="col-md-10 text-left">
+
+                {% for comment in comments %}
+                    {% if comment['answer_id'] == answer['id'] %}
+                        <div>
+                            <p style="font-family: 'Fredericka the Great', Tahoma, sans-serif; font-size: 18px;">Answer: {{ answer['message'] }}</p>
+                            <p class="text-center">Comment: {{ comment['message'] }}</p>
+                            <div class="text-right">
+                                <a href="/comment/{{ comment['id'] }}/edit" class="btn btn-info mb-2"><i class="fas fa-edit"></i></a>
+                                <form action="{{ url_for('delete_comment', comment_id=comment['id']) }}" method="post" style="display: inline-block;">
+                                        <button type="submit" class="btn btn-danger mb-2"><i class="fas fa-trash-alt"></i></button>
+                                </form>
+                            </div>
+                            <div class="text-right font-italic" style="font-size: 14px;">{{ comment['submission_time'] }}</div>
+                            <hr>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

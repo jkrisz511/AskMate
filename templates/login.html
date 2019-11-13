@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    {% include 'navbar.html' %}
+
+    <div class="wrapper">
+
+        <form class="form-login" action="" method="post">
+            <h2>Log In</h2>
+            {%  if error == "not valid" %}
+                <h3>Username or password is invalid!</h3>
+            {% endif %}
+            <div class="form-group">
+                <input type="text" class="form-control" name="username" aria-describedby="username" placeholder="Enter username">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="password" placeholder="Password">
+            </div>
+
+            <button type="submit" class="form-button btn btn-primary btn-block">Log In</button>
+            <div class="login-or">
+                <hr class="hr-or">
+                <span class="span-or">or</span>
+            </div>
+            <a href="{{ url_for('register') }}" class="form-button btn btn-light btn-block">Register</a>
+
+        </form>
+    </div>
+
+
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    {% include 'navbar.html' %}
+
+    <h1 class="mt-4 text-xl-center" style="font-family: 'Fredericka the Great', Tahoma, sans-serif; letter-spacing: 2px; word-spacing: 5px;">Edit answer</h1>
+
+    <form action="{{ url_for('edit_answer', answer_id=answer_id) }}" method="post">
+        <label for="new_answer"></label>
+        <div class="form-group">
+            {% for answer in answers %}
+                {% if answer_id == answer['id'] %}
+                <textarea name="answer" id="new_answer" class="form-control" minlength="10" cols="30" rows="5" required> {{ answer['message'] }}</textarea>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <button type="submit" class="btn btn-info mb-2">Editke</button>
+        <button type="reset" class="btn btn-danger mb-2">Reset</button>
+    </form>
+{% endblock %}

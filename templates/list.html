@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    {% include 'navbar.html' %}
+
+    <div class="float-right mb-4">
+        <a href="/add-question" class="btn btn-primary mb-2"><i class="fas fa-plus-circle"> Question</i></a>
+    </div>
+    <h2 class="mt-4 text-xl-left" style="font-family: 'Fredericka the Great', Tahoma, sans-serif; letter-spacing: 2px; word-spacing: 5px; padding: 15px;">Questions</h2>
+    <div class="table-responsive mt-4 mb-4">
+        <table class="table table-condensed table-hover table-ligth">
+            <thead class="bg-secondary text-white">
+            </thead>
+            <div class="dropdown">
+                <a class="btn btn-secondary dropdown-toggle" style="float: right; margin-bottom: 8px;" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Order by
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" href="/list?order_by=vote_number&direction=desc">Vote ↑↓</a>
+                        <a class="dropdown-item" href="/list?order_by=vote_number&direction=asc">Vote ↓↑ </a>
+                        <a class="dropdown-item" href="/list?order_by=view_number&direction=desc">View ↑↓</a>
+                        <a class="dropdown-item" href="/list?order_by=view_number&direction=asc">View ↓↑</a>
+                        <a class="dropdown-item" href="/list?order_by=submission_time&direction=desc">Submission Time ↑↓</a>
+                        <a class="dropdown-item" href="/list?order_by=submission_time&direction=asc">Submission Time ↓↑</a>
+                </div>
+            </div>
+            <tbody class="bg-light shadow p-3 mb-5 bg-white rounded">
+                {% for question in questions %}
+                <tr>
+                    <td>
+                        <div>
+                            <a href="/question/{{ question['id'] }}">{{ question['title'] }}</a>
+                        </div>
+                        <div><a href="" class="badge badge-secondary">python</a></div>
+                        <div class="text-right font-italic" style="font-size: 14px;">{{ question['submission_time'] }}</div>
+                    </td>
+                    <td>
+                        <div class="text-center">
+                            <span>
+                                <div class="text-sm-center">{{ question['view_number'] }}</div>
+                                <div class="badge badge-info">Views</div>
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-center">
+                            <span>
+                                <div class="text-sm-center">{{ question['vote_number'] }}</div>
+                                <div class="badge badge-info">Votes</div>
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+        
+{% endblock %}

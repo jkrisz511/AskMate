@@ -1,0 +1,69 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    {% include 'navbar.html' %}
+
+    <div class="row row-header">
+
+        <div class="col-md-2">
+            <div class="profile-img">
+                <img src="/static/img/user.png" alt="profile picture">
+            </div>
+        </div>
+
+        <div class="col-md-10">
+            <div class="profile-head">
+                <h3 class="user_name">
+                    {{ user_name }}
+                </h3>
+                <ul class="nav nav-tabs">
+                    <li class="nav-item nav-item-profile">
+                        <a href="/user/{{ user_id }}/" class="nav-link">Profile</a>
+                    </li>
+                    <li class="nav-item nav-item-profile"><a href="/user/{{ user_id }}/question" class="nav-link">Questions</a>
+                    </li>
+                    <li class="nav-item nav-item-profile"><a href="/user/{{ user_id }}/answer" class="nav-link">Answers</a>
+                    </li>
+                    <li class="nav-item nav-item-profile"><a href="/user/{{ user_id }}/comment" class="nav-link">Comments</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12" id="user-questions">
+        {% for data in datas %}
+            {% if user_id == data['user_id'] %}
+        <div class="row row-questions">
+            <div class="col-md-8">
+                    <div>
+                    <a href="/question/{{ data['id'] }}">{{ data['title'] }}</a>
+                    </div>
+                    <div class="text-right font-italic" style="font-size: 14px;">{{ data['submission_time'] }}</div>
+
+            </div>
+            <div class="col-md-2">
+                <div>
+                    <span>
+                        <div class="text-sm-left">{{ data['view_number'] }}</div>
+                        <div class="badge badge-info">Views</div>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-2">
+                 <div>
+                    <span>
+                        <div class="text-sm-left">{{ data['vote_number'] }}</div>
+                        <div class="badge badge-info">Votes</div>
+                    </span>
+                </div>
+            </div>
+            <div class="col"><hr></div>
+
+        </div>
+            {% endif %}
+        {% endfor %}
+
+    </div>
+
+
+{% endblock %}

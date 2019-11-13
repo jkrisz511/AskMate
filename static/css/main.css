@@ -1,0 +1,86 @@
+/********** Register and login css **********/
+
+.wrapper {
+    margin-top: 40px;
+}
+
+.form-login {
+    max-width: 420px;
+    padding: 15px 35px 45px;
+    margin: 0 auto;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 5px;
+}
+
+.form-login h2 {
+    font-family: 'Fredericka the Great', Tahoma, sans-serif;
+    padding: 10px 0;
+}
+
+.form-button {
+    font-family: Shojumaru, Tahoma, sans-serif;
+}
+
+.login-or {
+     position: relative;
+     color: #aaa;
+     margin-top: 20px;
+     margin-bottom: 20px;
+     padding-top: 10px;
+     padding-bottom: 10px;
+}
+
+.span-or {
+     display: block;
+     position: absolute;
+     left: 50%;
+     top: -2px;
+     margin-left: -25px;
+     background-color: #fff;
+     width: 50px;
+     text-align: center;
+}
+
+.hr-or {
+     height: 1px;
+     margin-top: 0px !important;
+     margin-bottom: 0px !important;
+}
+
+/*********** Profile css **********/
+
+.user_name {
+    font-family: 'Fredericka the Great', Tahoma, sans-serif;
+    margin-top: 8px;
+    margin-bottom: 40px;
+}
+
+.profile-img img {
+    width: 80%;
+    height: 100%;
+    margin-top: 8px;
+    border-radius: 50%;
+}
+
+.profile-head .nav-tabs {
+    margin-bottom:5%;
+}
+
+.profile-head .nav-tabs .nav-link {
+    font-weight: 600;
+    border: none;
+}
+
+.nav-item-profile {
+    font-family: 'Fredericka the Great', Tahoma, sans-serif;
+    font-size: 18px;
+}
+
+.row-header {
+    margin-bottom: 28px;
+}
+
+.row-questions {
+    margin-bottom: 16px;
+}

@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    {% include 'navbar.html' %}
+
+    
+    <h2 class="mt-4 text-xl-left" style="font-family: 'Fredericka the Great', Tahoma, sans-serif; letter-spacing: 2px; word-spacing: 5px; padding: 15px;">Users</h2>
+    <div class="table-responsive mt-4 mb-4">
+
+        <table class="table table-condensed table-hover table-ligth">
+            <thead class="bg-secondary text-white">
+            </thead>
+
+            <tbody class="bg-light shadow p-3 mb-5 bg-white rounded">
+                {% for user in users %}
+
+                <tr>
+                    <td>
+                        <div style="font-family: 'Fredericka the Great', Tahoma, sans-serif; font-size: 24px; letter-spacing: 2px; word-spacing: 5px;">
+                            <a href="/user/{{ user['id'] }}">{{ user['username'] }}</a>
+                        </div>
+                        <div class="text-right font-italic" style="font-size: 14px;">{{ user['registration_date'] }}</div>
+                    </td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+        
+{% endblock %}

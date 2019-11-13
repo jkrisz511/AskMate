@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    {% include 'navbar.html' %}
+
+    <h1 class="mt-4 text-xl-center" style="font-family: 'Fredericka the Great', Tahoma, sans-serif; letter-spacing: 2px; word-spacing: 5px;">Post a new answer</h1>
+
+    <form action="{{ url_for('route_new_answer', question_id=question_id) }}" method="post">
+        <label for="new_answer"></label>
+        <div class="form-group">
+            <textarea name="answer" id="new_answer" class="form-control" placeholder="Write your answer here" minlength="10" cols="30" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary mb-2">Submit</button>
+        <button type="reset" class="btn btn-danger mb-2">Reset</button>
+    </form>
+{% endblock %}

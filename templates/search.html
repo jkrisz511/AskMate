@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    {% include 'navbar.html' %}
+
+    <div class="float-right mb-4">
+        <a href="/add-question" class="btn btn-primary">Add New Question</a>
+    </div>
+    <h2 class="mt-4 text-xl-left" style="font-family: 'Fredericka the Great', Tahoma, sans-serif; letter-spacing: 2px; word-spacing: 5px; padding: 15px;">Questions</h2>
+    <div class="table-responsive mt-4 mb-4">
+
+        <table class="table table-condensed table-hover table-ligth">
+            <thead class="bg-secondary text-white">
+            </thead>
+            <tbody class="bg-light shadow p-3 mb-5 bg-white rounded">
+                {% for question in questions %}
+                <tr>
+                    <td>
+                        <div>
+                            <span>
+                                <div class="text-sm-left">{{ question['view_number'] }}</div>
+                                <div class="badge badge-info">Views</div>
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <span>
+                            <div class="text-sm-left">{{ question['vote_number'] }}</div>
+                            <div class="badge badge-info">Votes</div>
+                        </span>
+                    </td>
+                    <td>
+                        <div>
+                            <a href="/question/{{ question['id'] }}">{{ question['title'] }}</a>
+                        </div>
+                        <div><a href="" class="badge badge-secondary">python</a></div>
+                        <div class="text-right font-italic" style="font-size: 14px;">{{ question['submission_time'] }}</div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+
+        </table>
+    </div>
+        
+{% endblock %}

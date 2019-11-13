@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    {% include 'navbar.html' %}
+
+    <div class="wrapper">
+
+        <form class="form-login" action="" method="post">
+            <h2>Sign Up</h2>
+            {% if error == "taken" %}
+                <h3>Username is already taken!</h3>
+            {% endif %}
+            <div class="form-group">
+                <input type="text" class="form-control" name="username" minlength="3" aria-describedby="username" placeholder="Enter username">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="password" minlength="5" placeholder="Password">
+            </div>
+
+            <button type="submit" class="form-button btn btn-primary btn-block">Sign Up</button>
+
+        </form>
+    </div>
+
+
+
+{% endblock %}

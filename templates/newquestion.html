@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    {% include 'navbar.html' %}
+
+    <h1 class="mt-4 text-xl-center" style="font-family: 'Fredericka the Great', Tahoma, sans-serif; letter-spacing: 2px; word-spacing: 5px;">Add new question</h1>
+
+    <form action="{{ url_for('add_question') }}" method="post">
+
+        <div class="form-group">
+            <label for="question-title">Question Title (Required):</label>
+            <input id="question-title"  class="form-control" name="question-title" required>
+        </div>
+
+        <div class="form-group">
+            <label for="question">Question (Required):</label><br>
+            <textarea id="question" name="new-question" class="form-control" placeholder="Write your question here" rows="6" cols="40" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary mb-2">Submit</button>
+        <button type="reset" class="btn btn-danger mb-2">Reset</button>
+
+    </form>
+{% endblock %}
